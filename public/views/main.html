@@ -1,0 +1,223 @@
+<div class="sidebar">
+    <div class="col-md-8">
+        <div class="jumbotron row">
+            <div class="frontcard col-sm-6 col-sm-offset-3 ">
+
+                <!--                //=================front card text input =====================//-->
+                <!--                //=================front card text input =====================//-->
+                <!--                //=================front card text input =====================//-->
+
+                <div class="frontcardTextinput">
+                    <button ng-if="textbutton" class="icon btn glyphicon glyphicon-pencil" ng-click="showtextbutton()"></button>
+
+                    <textarea ng-if="!textbutton" focus-me="focusText" class="form-control icontext" rows="3"></textarea>
+
+                    <span ng-if="!textbutton" ng-click="showtextbutton()" class="cancelbutton glyphicon glyphicon-remove"></span>
+
+                </div>
+
+
+                <!--                //=================front card image input =====================//-->
+                <!--                //=================front card image input =====================//-->
+                <!--                //=================front card image input =====================//-->
+
+                <div class="frontcardImageinput">
+                    <button ng-if="imagebutton" ng-click="clickImageUpload(); $event.stopPropagation();" class="icon btn glyphicon glyphicon-picture"></button>
+                    <input ng-model="imagefile" type="file" id="fileInput" class="icon btn glyphicon glyphicon-picture" />
+                    <img ng-if="!imagebutton" class="croppedimage" ng-src="{{finalcroppedimaged}}" />
+                    <span ng-if="!imagebutton" ng-click="showimagebutton()" class="imagecancelbutton glyphicon glyphicon-remove"></span>
+
+                    <span ng-if="!imagebutton" ng-click="showCustom()" class="imageeditbutton glyphicon glyphicon-fullscreen"></span>
+                    <div id="fade" ng-show="display"></div>
+                </div>
+
+
+                <!--                //=================front card sound input =====================//-->
+                <!--                //=================front card sound input =====================//-->
+                <!--                //=================front card sound input =====================//-->
+
+                <div class="frontcardSoundinput">
+
+                    <button ng-if="soundbutton" class="icon btn glyphicon glyphicon-volume-up" ng-click="clickSoundUpload()"></button>
+
+                    <button type="file" ng-file-select ng-model="myFiles" ng-file-change="fileSelected($files, $event)" ng-multiple="false" accept="image" resetOnClick="true" id="soundInput"></button>
+
+                    <span ng-if="!soundbutton" ng-click="showSoundInputButton()" class="soundcancelbutton glyphicon glyphicon-remove"></span>
+
+                    <button ng-if="soundUploaded" class="btn btn-primary ng-binding soundbutton" ng-click="audio.paused ? audio.play() : audio.pause()">Play</button>
+                    <button ng-if="soundUploaded" class="btn btn-danger soundbutton" ng-click="audio.restart()">Stop</button>
+
+                </div>
+
+            </div>
+            <div class="backcard col-sm-6 col-sm-offset-1">
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="main">
+    <div class="col-md-4">
+        <div class="jumbotron">
+
+        </div>
+    </div>
+</div>
+
+<!--
+<button ng-click="toggleModal()">Open Modal Dialog</button>
+<modal-dialog show="modalShow" width="80%" height="80%">
+
+</modal-dialog>
+-->
+
+<!--
+ <div>Select an image file:
+    <input type="file" id="fileInput" />
+  </div>
+-->
+
+
+
+
+<!--//=============================== full screen overlay==============//-->
+<!--//=============================== full screen overlay==============//-->
+<!--//=============================== full screen overlay==============//-->
+
+
+<!--    <button ng-click="showCustom()">opend</button>-->
+<div id="overlay" ng-show="display">
+
+    <div class="cropArea">
+        <img-crop image="myImage" result-image="myCroppedImage" area-type="square" result-image-size="width=720"></img-crop>
+    </div>
+    <!--    <img ng-if="!imagebutton" class="croppedimage" ng-src="{{myCroppedImage}}" />-->
+
+    <button class="btn btn-primary center-block" ng-click="close()">Apply &amp; Close</button>
+
+</div>
+<!--//=============================== full screen overlay==============//-->
+<!--//=============================== full screen overlay==============//-->
+<!--//=============================== full screen overlay==============//-->
+
+
+
+
+<!--        //------------------- add more cards ------------------//-->
+<!--        //------------------- add more cards ------------------//-->
+<!--        //------------------- add more cards ------------------//-->
+<!--        //------------------- add more cards ------------------//-->
+
+<!--
+<button class="btn btn-success btn-block" ng-click="addNewSubItem()">Add More Items</button>
+
+<div class="container-fluid" ng-repeat="subitem in item.subitems track by $index">
+    <sub-item-partial></sub-item-partial>
+</div>
+-->
+
+
+
+<!--        //------------------- add more cards ------------------//-->
+<!--        //------------------- add more cards ------------------//-->
+<!--        //------------------- add more cards ------------------//-->
+<!--        //------------------- add more cards ------------------//-->
+
+
+
+
+<!--============================audio file upload=================================-->
+
+<!--<button ng-file-select ng-model="files" ng-file-change="upload(files)" ng-multiple="true">Attach Any File</button>-->
+<!--<button ng-file-select ng-model="files" ng-file-change="upload(files)" ng-multiple="true">Attach Any File</button>-->
+
+<!--<button type="file" ng-file-select ng-model="myFiles" ng-file-change="fileSelected($files, $event)" ng-multiple="false" accept="image" resetOnClick="true">Upload</button>-->
+
+
+<!--////============================ audio playback=======================///
+<!--////============================ audio playback=======================///
+<!--////============================ audio playback=======================///-->
+
+
+<!--
+<div class="videogular-container">
+    <videogular vg-theme="config.theme.url" class="videogular-container audio">
+        <vg-audio vg-src="config.sources"></vg-audio>
+
+        <vg-controls>
+            <vg-play-pause-button></vg-play-pause-button>
+            <vg-timedisplay>{{ currentTime | date:'mm:ss' }}</vg-timedisplay>
+            <vg-scrubBar>
+                <vg-scrubbarcurrenttime></vg-scrubbarcurrenttime>
+            </vg-scrubBar>
+            <vg-timedisplay>{{ timeLeft | date:'mm:ss' }}</vg-timedisplay>
+            <vg-volume>
+                <vg-mutebutton></vg-mutebutton>
+            </vg-volume>
+        </vg-controls>
+    </videogular>
+</div>
+-->
+
+
+<!--////============================ audio playback=======================///
+<!--////============================ audio playback=======================///
+<!--////============================ audio playback=======================///-->
+
+
+
+
+
+<!--<input type="file" nv-file-select uploader="{FileUploader}"/>-->
+
+<!--<button pl-upload="" pl-progress-model="percent" pl-auto-upload="true" pl-files-model="files">Upload Files</button>-->
+
+<!--============================audio file upload=================================-->
+
+
+<!--
+ <div id="overlay" ng-show="display">
+    This is a custom modal. The angular-modal-service doesn't depend on bootstrap, you
+    can use any modal you want.
+    <a href ng-click="close()">Close</a>
+</div>
+<div id="fade" ng-show="display"></div>
+-->
+
+
+
+
+<!--
+  <div class="cropArea">
+    <img-crop image="myImage" result-image="myCroppedImage" area-type="square"></img-crop>
+  </div>
+-->
+<!--
+                        <div>Cropped Image:</div>
+                        <div>
+                          <img ng-src="{{myCroppedImage}}" />
+                        </div>
+-->
+
+<!--
+
+
+<cropme width="250" height="120" ratio="0.5" icon-class="" type="png" destination-width="200">
+</cropme>
+
+-->
+
+<!--
+
+  <input type="file" ap-file-src="src">
+  <canvas width="400" height="450" ap-canvas src="src" image="image" zoomable="true" frame="frame" scale="scale" offset="offset"></canvas>
+  <div ng-show="src">
+    <input type="button" value="zoom in (+)" ng-click="zoomIn()">
+    <input type="button" value="zoom out (-)" ng-click="zoomOut()">
+    <input type="button" value="crop ->" ng-click="crop()">
+  </div>
+  <a href="#" ng-show="src" ng-click="download($event)">download</a>
+-->
+
